@@ -106,7 +106,9 @@ async function main() {
         await fetchSchema('csgo_english.txt'),
     );
 
-    const user = new SteamUser();
+    // dataDirectory: null — otherwise steam-user persists cellid/machineid/
+    // machine-auth tokens to an appdata dir, breaking the "nothing on disk" promise
+    const user = new SteamUser({ dataDirectory: null });
     const cs2 = new NodeCS2(user);
     let done = false;
 
@@ -140,6 +142,7 @@ async function main() {
             console.log('Connected to GC. Waiting for inventory to settle...');
             await waitForInventory(cs2);
             const inv = cs2.inventory || [];
+            if (!inv.length) die('inventory never arrived from the GC — try again (is CS2 running elsewhere?)');
             const topLevel = inv.filter((i) => !i.casket_id);
             console.log(`Top-level inventory items: ${topLevel.length}`);
 
@@ -176,4 +179,4 @@ async function main() {
     });
 }
 
-main();
+main().catch((e) => die(e.message));

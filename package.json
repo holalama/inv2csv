@@ -8,12 +8,19 @@
     "type": "git",
     "url": "git+https://github.com/holalama/inv2csv.git"
   },
+  "keywords": ["cs2", "csgo", "steam", "inventory", "csv", "storage-unit", "export"],
+  "files": ["index.js", "resolve.js"],
   "main": "index.js",
   "bin": {
     "inv2csv": "index.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "steam-appticket": {
+      "protobufjs": "^7.6.5"
+    }
   },
   "dependencies": {
     "node-cs2": "^2.2.2",
