@@ -1,0 +1,25 @@
+{
+  "name": "inv2csv",
+  "version": "1.0.0",
+  "description": "Export your full CS2 inventory (incl. storage units) to a CSV of market_hash_name, quantity and trade-lock date",
+  "license": "MIT",
+  "author": "Sven Kandziora",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holalama/inv2csv.git"
+  },
+  "main": "index.js",
+  "bin": {
+    "inv2csv": "index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "node-cs2": "^2.2.2",
+    "qrcode": "^1.5.4",
+    "steam-session": "^1.9.1",
+    "steam-user": "^5.3.0",
+    "vdf-parser": "^1.2.1"
+  }
+}
