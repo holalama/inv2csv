@@ -38,6 +38,11 @@ const SCHEMA_FILES = {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const die = (msg) => { console.error('FATAL:', msg); process.exit(1); };
 
+function ask(q) {
+    const rl = require('readline').createInterface({ input: process.stdin, output: process.stdout });
+    return new Promise((res) => rl.question(q, (a) => { rl.close(); res(a.trim()); }));
+}
+
 // Always fetched fresh, kept in memory only: no stale-schema failure mode,
 // and nothing but inventory.csv ever touches the disk.
 async function fetchSchema(name) {
@@ -90,6 +95,11 @@ function writeCsv(rows, out) {
 }
 
 async function main() {
+    console.log('For safety reasons it is recommended to NOT have CS2 running on this account while this script runs.');
+    const ok = await ask('Continue? [y/N] ');
+    if (ok.toLowerCase() !== 'y') { console.log('Aborted.'); process.exit(0); }
+
+    console.log('\nDownloading two game files for item name resolution...');
     // fail fast, before asking the user to scan
     const resolver = new Resolver(
         await fetchSchema('items_game.txt'),

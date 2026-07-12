@@ -1,6 +1,6 @@
 {
   "name": "inv2csv",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Export your full CS2 inventory (incl. storage units) to a CSV of market_hash_name, quantity and trade-lock date",
   "license": "MIT",
   "author": "Sven Kandziora",
