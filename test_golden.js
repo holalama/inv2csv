@@ -10,7 +10,10 @@ const fs = require('fs');
 const path = require('path');
 const { Resolver, aggregate } = require('./resolve');
 
-const INV_FETCHER = path.join(__dirname, '..', 'inv-fetcher');
+// dev-only: needs a checkout of the cs2-inv-tracker monorepo (the reference
+// python pipeline) next to this repo, or point INV_FETCHER at its inv-fetcher/
+const INV_FETCHER = process.env.INV_FETCHER
+    || path.join(__dirname, '..', 'cs2-inv-tracker', 'inv-fetcher');
 const DUMP = path.resolve(process.argv[2] || path.join(INV_FETCHER, 'data', 'gc_dump.json'));
 
 const PY = `
